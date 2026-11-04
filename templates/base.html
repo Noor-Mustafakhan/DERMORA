@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="DERMORA — Premium skin and laser clinic in Lahore, Pakistan. Advanced dermatological care, laser treatments, HydraFacial, and specialized South Asian skin solutions.">
+    <meta name="theme-color" content="#183D35">
+
+    <title>{% block title %}DERMORA | Premium Skin &amp; Laser Clinic | Lahore{% endblock %}</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
+
+    <!-- Google Fonts: Cormorant Garamond & DM Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS (Configured for DERMORA Brand System) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: { DEFAULT: '#183D35', dark: '#0D211C' },
+                        ivory: { DEFAULT: '#F5F3ED', light: '#FAF9F6', dark: '#ECE8DD' },
+                        champagne: { DEFAULT: '#C5A77D', light: '#D8C2A2', dark: '#A8895D' },
+                        charcoal: { DEFAULT: '#292D2B', muted: '#606763', light: '#8C9490' },
+                        sage: { DEFAULT: '#D8E0D8', light: '#EBF0EB' }
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'Playfair Display', 'Georgia', 'serif'],
+                        sans: ['DM Sans', 'Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Core Stylesheet (Design Tokens & Custom Layouts) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', v=asset_version) }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="site-body">
+    <!-- Accessible Skip to Content -->
+    <a href="#main-content" class="skip-to-content">Skip to content</a>
+
+    <!-- Main Navigation Header -->
+    <header class="header" id="site-header">
+        <div class="header__inner">
+            <!-- Custom Wordmark & Clinic Subline -->
+            <a href="{{ url_for('index') }}" class="wordmark" aria-label="DERMORA Homepage">
+                <div class="wordmark__brand">
+                    <span class="wordmark__text">DERMORA</span>
+                    <span class="wordmark__sub">Skin &amp; Laser Clinic</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation with Functional Treatments Dropdown -->
+            <nav class="nav-desktop" aria-label="Primary Navigation">
+                <ul class="nav-desktop__list">
+                    <!-- Treatments Dropdown -->
+                    <li class="nav-desktop__item nav-dropdown js-nav-dropdown">
+                        <button type="button" class="nav-desktop__link nav-dropdown__trigger js-dropdown-trigger {% if request.endpoint in ['treatments_overview', 'treatment_detail'] %}is-active{% endif %}" aria-expanded="false" aria-haspopup="true" aria-controls="treatments-dropdown-menu">
+                            <span>Treatments</span>
+                            <svg class="nav-dropdown__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m1 1 4 4 4-4"/>
+                            </svg>
+                        </button>
+                        <div class="nav-dropdown__menu js-dropdown-menu" id="treatments-dropdown-menu" role="menu" aria-label="Treatments navigation" style="display: none;">
+                            <div class="nav-dropdown__grid">
+                                <!-- Group 1: Facial Treatments -->
+                                <div class="nav-dropdown__col">
+                                    <span class="nav-dropdown__header">Facial Treatments</span>
+                                    <ul class="nav-dropdown__sublist">
+                                        <li>
+                                            <a href="{{ url_for('treatment_detail', slug='hydrafacial') }}" class="nav-dropdown__link">
+                                                <span class="nav-dropdown__name">HydraFacial MD Elite</span>
+                                                <span class="nav-dropdown__desc">Vortex Extraction &amp; Peptides</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ url_for('treatment_detail', slug='bb-glow') }}" class="nav-dropdown__link">
+                                                <span class="nav-dropdown__name">BB Glow</span>
+                                                <span class="nav-dropdown__desc">Radiance Meso-Infusion</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Group 2: Laser Treatments -->
+                                <div class="nav-dropdown__col">
+                                    <span class="nav-dropdown__header">Laser Treatments</span>
+                                    <ul class="nav-dropdown__sublist">
+                                        <li>
+                                            <a href="{{ url_for('treatment_detail', slug='laser-treatments') }}" class="nav-dropdown__link">
+                                                <span class="nav-dropdown__name">Calibrated Laser Protocols</span>
+                                                <span class="nav-dropdown__desc">Diode &amp; Nd:YAG 1064nm</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ url_for('treatments_overview') }}#laser" class="nav-dropdown__link">
+                                                <span class="nav-dropdown__name">Laser Overview &amp; Safety</span>
+                                                <span class="nav-dropdown__desc">Melanin Photoprotection</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Group 3: Targeted Skin Areas -->
+                                <div class="nav-dropdown__col">
+                                    <span class="nav-dropdown__header">Targeted Skin Areas</span>
+                                    <ul class="nav-dropdown__sublist">
+                                        <li>
+                                            <a href="{{ url_for('treatment_detail', slug='dark-underarms') }}" class="nav-dropdown__link">
+                                                <span class="nav-dropdown__name">Dark Underarms</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ url_for('treatment_detail', slug='dark-elbows') }}" class="nav-dropdown__link">
+                                                <span class="nav-dropdown__name">Dark Elbows</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ url_for('treatment_detail', slug='dark-knuckles') }}" class="nav-dropdown__link">
+                                                <span class="nav-dropdown__name">Dark Knuckles</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ url_for('treatment_detail', slug='dark-hands') }}" class="nav-dropdown__link">
+                                                <span class="nav-dropdown__name">Dark Hands</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ url_for('treatment_detail', slug='dark-ankles') }}" class="nav-dropdown__link">
+                                                <span class="nav-dropdown__name">Dark Ankles</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="nav-dropdown__footer">
+                                <a href="{{ url_for('treatments_overview') }}" class="nav-dropdown__footer-link">
+                                    <span>Explore All Verified Clinical Protocols</span>
+                                    <span class="arrow">&rarr;</span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li><a href="{{ url_for('concerns_overview') }}" class="nav-desktop__link {% if request.endpoint in ['concerns_overview', 'concern_detail'] %}is-active{% endif %}">Skin Concerns</a></li>
+                    <li><a href="{{ url_for('packages_page') }}" class="nav-desktop__link {% if request.endpoint == 'packages_page' %}is-active{% endif %}">Offers</a></li>
+                    <li><a href="{{ url_for('contact_page') }}" class="nav-desktop__link {% if request.endpoint == 'contact_page' %}is-active{% endif %}">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- Header Actions -->
+            <div class="header__actions">
+                <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--champagne btn--sm header__cta">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    <span>Book Consultation</span>
+                </a>
+
+                <!-- Mobile Menu Hamburger Button -->
+                <button type="button" class="mobile-toggle js-mobile-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">
+                    <span class="mobile-toggle__line"></span>
+                    <span class="mobile-toggle__line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer (Direct body child to prevent backdrop-filter containing block trap) -->
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+        <div class="mobile-nav__backdrop js-mobile-close"></div>
+        <div class="mobile-nav__panel">
+            <div class="mobile-nav__header">
+                <a href="{{ url_for('index') }}" class="wordmark wordmark--mobile">
+                    <div class="wordmark__brand">
+                        <span class="wordmark__text">DERMORA</span>
+                        <span class="wordmark__sub">Skin &amp; Laser Clinic</span>
+                    </div>
+                </a>
+                <button type="button" class="mobile-nav__close js-mobile-close" aria-label="Close menu">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <nav class="mobile-nav__body">
+                <div class="mobile-nav__cta-wrap mb-4">
+                    <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--champagne btn--full js-nav-close">
+                        <span>Book Consultation</span>
+                        <span class="arrow">&rarr;</span>
+                    </a>
+                </div>
+                <ul class="mobile-nav__list">
+                    <li><a href="{{ url_for('index') }}" class="mobile-nav__link js-nav-close">Home</a></li>
+                    <li><a href="{{ url_for('concerns_overview') }}" class="mobile-nav__link js-nav-close">Skin Concerns</a></li>
+                    
+                    <!-- Mobile Accordion for Treatments -->
+                    <li class="mobile-nav__accordion">
+                        <button type="button" class="mobile-nav__link mobile-nav__accordion-trigger js-mobile-accordion" aria-expanded="false">
+                            <span>Treatments</span>
+                            <svg class="mobile-accordion__icon" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m1 1 4 4 4-4"/></svg>
+                        </button>
+                        <div class="mobile-nav__accordion-panel js-mobile-accordion-panel" hidden>
+                            <a href="{{ url_for('treatments_overview') }}" class="mobile-accordion__sublink font-semibold js-nav-close">&rarr; All Treatments Overview</a>
+                            <span class="mobile-accordion__header">Facial Treatments</span>
+                            <a href="{{ url_for('treatment_detail', slug='hydrafacial') }}" class="mobile-accordion__sublink js-nav-close">HydraFacial MD Elite</a>
+                            <a href="{{ url_for('treatment_detail', slug='bb-glow') }}" class="mobile-accordion__sublink js-nav-close">BB Glow</a>
+
+                            <span class="mobile-accordion__header">Laser Treatments</span>
+                            <a href="{{ url_for('treatment_detail', slug='laser-treatments') }}" class="mobile-accordion__sublink js-nav-close">Calibrated Laser Protocols</a>
+
+                            <span class="mobile-accordion__header">Targeted Skin Areas</span>
+                            <a href="{{ url_for('treatment_detail', slug='dark-underarms') }}" class="mobile-accordion__sublink js-nav-close">Dark Underarms</a>
+                            <a href="{{ url_for('treatment_detail', slug='dark-elbows') }}" class="mobile-accordion__sublink js-nav-close">Dark Elbows</a>
+                            <a href="{{ url_for('treatment_detail', slug='dark-knuckles') }}" class="mobile-accordion__sublink js-nav-close">Dark Knuckles</a>
+                            <a href="{{ url_for('treatment_detail', slug='dark-hands') }}" class="mobile-accordion__sublink js-nav-close">Dark Hands</a>
+                            <a href="{{ url_for('treatment_detail', slug='dark-ankles') }}" class="mobile-accordion__sublink js-nav-close">Dark Ankles</a>
+                        </div>
+                    </li>
+
+                    <li><a href="{{ url_for('packages_page') }}" class="mobile-nav__link js-nav-close">Offers</a></li>
+                    <li><a href="{{ url_for('results_page') }}" class="mobile-nav__link js-nav-close">Results Journal</a></li>
+                    <li><a href="{{ url_for('faqs_page') }}" class="mobile-nav__link js-nav-close">FAQs</a></li>
+                    <li><a href="{{ url_for('contact_page') }}" class="mobile-nav__link js-nav-close">Contact</a></li>
+                </ul>
+
+                <div class="mobile-nav__footer">
+                    <p class="mobile-nav__caption">Gulberg III, Lahore, Pakistan</p>
+                    <p class="mobile-nav__contact"><a href="tel:{{ contact_phone }}">{{ contact_phone }}</a></p>
+                    <p class="mobile-nav__contact"><a href="mailto:{{ contact_email }}">{{ contact_email }}</a></p>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content Slot -->
+    <main id="main-content" class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Floating AI Skin Assistant Button -->
+    <div class="ai-launcher" aria-label="DERMORA AI Skin Assistant">
+        <button type="button" class="ai-launcher__btn js-open-ai" aria-haspopup="dialog" aria-controls="ai-drawer" aria-label="Open DERMORA AI Skin Assistant">
+            <span class="ai-launcher__spark">✦</span>
+            <div class="ai-launcher__text-group">
+                <span class="ai-launcher__brand">DERMORA AI</span>
+                <span class="ai-launcher__role">Skin Assistant</span>
+            </div>
+            <span class="ai-launcher__status-dot" aria-hidden="true" title="Online Clinical Companion"></span>
+            <span class="ai-launcher__chat-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+            </span>
+        </button>
+    </div>
+
+    <!-- AI Skin Assistant Minimalist Drawer -->
+    <aside class="ai-drawer" id="ai-drawer" role="dialog" aria-modal="true" aria-labelledby="ai-drawer-heading" aria-hidden="true">
+        <div class="ai-drawer__backdrop js-close-ai"></div>
+        <div class="ai-drawer__panel">
+            <div class="ai-drawer__topbar">
+                <div class="ai-drawer__status">
+                    <span class="ai-drawer__status-dot" aria-hidden="true"></span>
+                    <span class="ai-drawer__status-label">Clinical Companion &bull; Online</span>
+                </div>
+                <div class="ai-drawer__controls">
+                    <button type="button" class="ai-drawer__control-btn js-close-ai" title="Minimize drawer" aria-label="Minimize">&minus;</button>
+                    <button type="button" class="ai-drawer__control-btn js-close-ai" title="Close assistant" aria-label="Close assistant">&times;</button>
+                </div>
+            </div>
+
+            <div class="ai-chat-stream js-ai-chat-stream" id="ai-chat-stream">
+                <!-- Welcome Message from Assistant -->
+                <div class="ai-msg ai-msg--assistant">
+                    <div class="ai-msg__bubble">
+                        <p class="font-medium text-forest mb-1"><strong>DERMORA Clinical Companion</strong></p>
+                        <p>
+                            Welcome. I am calibrated specifically for South Asian skin phototypes (Fitzpatrick III–VI). 
+                            I can guide you on Nd:YAG laser safety, HydraFacial protocols, friction hyperpigmentation, 
+                            and pre-consultation expectations in Lahore.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Suggested Quick Inquiries -->
+                <div class="ai-chat-suggestions js-ai-suggestions">
+                    <button type="button" class="ai-suggestion-chip js-ai-chip" data-query="laser-safety">
+                        ✦ Laser Safety for Fitzpatrick III–VI
+                    </button>
+                    <button type="button" class="ai-suggestion-chip js-ai-chip" data-query="dark-areas">
+                        ✦ Dark Underarms &amp; Elbows Protocol
+                    </button>
+                    <button type="button" class="ai-suggestion-chip js-ai-chip" data-query="hydrafacial">
+                        ✦ HydraFacial vs Chemical Peels
+                    </button>
+                    <button type="button" class="ai-suggestion-chip js-ai-chip" data-query="acne-scars">
+                        ✦ Acne Scars &amp; Barrier Health
+                    </button>
+                </div>
+
+                <!-- Typing Indicator (Hidden by default) -->
+                <div class="ai-chat-typing js-ai-typing" style="display: none;">
+                    <span class="ai-typing-dot"></span>
+                    <span class="ai-typing-dot"></span>
+                    <span class="ai-typing-dot"></span>
+                    <span class="text-xs text-charcoal-muted ml-2">Consulting clinical guidelines...</span>
+                </div>
+            </div>
+
+            <!-- Input Bar -->
+            <div class="ai-chat-input-bar">
+                <form class="ai-input-form js-ai-form">
+                    <input 
+                        type="text" 
+                        class="ai-input-field js-ai-input" 
+                        placeholder="Ask about treatments or skin concerns..." 
+                        aria-label="Message DERMORA Assistant"
+                    >
+                    <button type="submit" class="ai-send-btn js-ai-send" aria-label="Send inquiry">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Bottom Action CTA -->
+            <div class="ai-drawer-cta">
+                <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--champagne btn--full btn--sm js-close-ai">
+                    <span>Schedule Doctor Consultation in Lahore &rarr;</span>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Minimal Luxury Footer -->
+    <footer class="footer" id="site-footer">
+        <div class="footer__inner">
+            <div class="footer__top">
+                <div class="footer__brand-block">
+                    <a href="{{ url_for('index') }}" class="wordmark wordmark--light" aria-label="DERMORA Homepage">
+                        <span class="wordmark__text">DERMORA</span>
+                    </a>
+                    <p class="footer__tagline">
+                        Thoughtful skin and laser care, guided by professional expertise and designed around your individual needs.
+                    </p>
+                    <p class="footer__meta-clinic">
+                        <span>Gulberg III, Lahore, Pakistan</span> &bull; <span>Mon–Sat 10:00 AM – 08:00 PM</span>
+                    </p>
+                </div>
+
+                <div class="footer__nav-block">
+                    <span class="footer__label">Navigation</span>
+                    <ul class="footer__nav-list">
+                        <li><a href="{{ url_for('index') }}" class="footer__link">Home</a></li>
+                        <li><a href="{{ url_for('treatments_overview') }}" class="footer__link">Treatments</a></li>
+                        <li><a href="{{ url_for('concerns_overview') }}" class="footer__link">Skin Concerns</a></li>
+                        <li><a href="{{ url_for('packages_page') }}" class="footer__link">Offers &amp; Packages</a></li>
+                        <li><a href="{{ url_for('results_page') }}" class="footer__link">Results Journal</a></li>
+                        <li><a href="{{ url_for('about_page') }}" class="footer__link">About DERMORA</a></li>
+                        <li><a href="{{ url_for('faqs_page') }}" class="footer__link">FAQs</a></li>
+                        <li><a href="{{ url_for('contact_page') }}" class="footer__link">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__treatments-block">
+                    <span class="footer__label">Featured Protocols</span>
+                    <ul class="footer__nav-list">
+                        <li><a href="{{ url_for('treatment_detail', slug='hydrafacial') }}" class="footer__link">HydraFacial MD Elite</a></li>
+                        <li><a href="{{ url_for('treatment_detail', slug='laser-treatments') }}" class="footer__link">Laser Protocols (1064nm)</a></li>
+                        <li><a href="{{ url_for('treatment_detail', slug='bb-glow') }}" class="footer__link">BB Glow Meso-Infusion</a></li>
+                        <li><a href="{{ url_for('treatment_detail', slug='dark-underarms') }}" class="footer__link">Dark Underarms Care</a></li>
+                        <li><a href="{{ url_for('treatment_detail', slug='dark-elbows') }}" class="footer__link">Dark Elbows Smoothing</a></li>
+                        <li><a href="{{ url_for('treatment_detail', slug='dark-knuckles') }}" class="footer__link">Dark Knuckles Protocol</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__contact-block">
+                    <span class="footer__label">Clinic Concierge</span>
+                    <address class="footer__address">
+                        <p>{{ clinic_location }}</p>
+                        <p><a href="tel:{{ contact_phone }}" class="footer__contact-link">{{ contact_phone }}</a></p>
+                        <p><a href="mailto:{{ contact_email }}" class="footer__contact-link">{{ contact_email }}</a></p>
+                        <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--champagne btn--sm footer__book-btn">Request Consultation</a>
+                    </address>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <p class="footer__copyright">&copy; {{ current_year }} DERMORA Skin &amp; Laser Clinic. All rights reserved.</p>
+                <div class="footer__legal-links">
+                    <a href="#privacy" class="footer__legal-link js-legal-open" data-type="privacy">Privacy Policy</a>
+                    <span class="footer__sep">/</span>
+                    <a href="#terms" class="footer__legal-link js-legal-open" data-type="terms">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Minimal Legal Modal -->
+    <div class="legal-modal js-legal-modal" id="legal-modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="legal-modal__backdrop js-legal-close"></div>
+        <div class="legal-modal__box">
+            <div class="legal-modal__header">
+                <h3 class="legal-modal__title js-legal-title">Privacy Policy</h3>
+                <button type="button" class="legal-modal__close js-legal-close" aria-label="Close dialog">&times;</button>
+            </div>
+            <div class="legal-modal__content js-legal-content">
+                <p>At DERMORA, patient confidentiality and medical ethics are foundational. In this Phase 1 portfolio presentation, no patient data is persistently stored.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- GSAP & ScrollTrigger Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Main JavaScript Interactions -->
+    <script src="{{ url_for('static', filename='js/main.js', v=asset_version) }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

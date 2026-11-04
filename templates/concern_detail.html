@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+
+{% block title %}{{ concern.name }} | Skin Concern Guide | DERMORA Lahore{% endblock %}
+
+{% block content %}
+<!-- Section 1 — Concern Hero -->
+<section class="page-hero section--forest">
+    <div class="page-hero__bg-wrap">
+        <img 
+            src="{{ url_for('static', filename='images/' ~ concern.image) }}" 
+            alt="{{ concern.name }}" 
+            class="page-hero__bg"
+            loading="eager"
+            width="1440"
+            height="500"
+        >
+        <div class="page-hero__overlay" aria-hidden="true"></div>
+    </div>
+
+    <div class="container page-hero__content">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol class="breadcrumbs__list">
+                <li class="breadcrumbs__item"><a href="{{ url_for('index') }}" class="breadcrumbs__link">Home</a></li>
+                <li class="breadcrumbs__separator" aria-hidden="true">&rsaquo;</li>
+                <li class="breadcrumbs__item"><a href="{{ url_for('concerns_overview') }}" class="breadcrumbs__link">Skin Concerns</a></li>
+                <li class="breadcrumbs__separator" aria-hidden="true">&rsaquo;</li>
+                <li class="breadcrumbs__item"><span class="breadcrumbs__current" aria-current="page">{{ concern.name }}</span></li>
+            </ol>
+        </nav>
+
+        <span class="editorial-eyebrow text-champagne">{{ concern.category_label }} &bull; Educational Guide</span>
+        <h1 class="page-hero__title">
+            {{ concern.name }}
+        </h1>
+        <p class="page-hero__subtitle">
+            {{ concern.short_desc }}
+        </p>
+
+        <div class="page-hero__actions">
+            <a href="#clinical-options" class="btn btn--champagne-pill">
+                <span>View Treatment Pathways</span>
+                <span class="btn__arrow" aria-hidden="true">&darr;</span>
+            </a>
+            <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--glass-pill">
+                <span>Book Clinical Assessment</span>
+                <span class="btn__sparkle" aria-hidden="true">&rarr;</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Detail Content Container -->
+<div class="detail-page-wrapper section--ivory">
+    <div class="container">
+        <div class="detail-layout">
+            <!-- Main Editorial Column -->
+            <div class="detail-main">
+                <!-- 1. Concern Introduction -->
+                <section class="detail-section" id="introduction">
+                    <span class="editorial-eyebrow">Dermatological Biological Context</span>
+                    <h2 class="detail-section__title">Understanding {{ concern.name }}</h2>
+                    <div class="detail-prose">
+                        <p>{{ concern.introduction }}</p>
+                    </div>
+                </section>
+
+                <!-- 2. Common Characteristics -->
+                <section class="detail-section" id="characteristics">
+                    <span class="editorial-eyebrow">Clinical Presentation</span>
+                    <h2 class="detail-section__title">Common Characteristics</h2>
+                    <ul class="detail-checklist">
+                        {% for item in concern.characteristics %}
+                        <li class="detail-checklist__item">
+                            <span class="detail-checklist__bullet" aria-hidden="true">&bull;</span>
+                            <span class="detail-checklist__text">{{ item }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+                <!-- 3. Possible Contributing Factors -->
+                <section class="detail-section" id="contributing-factors">
+                    <span class="editorial-eyebrow">Etiology &amp; Triggers</span>
+                    <h2 class="detail-section__title">Possible Contributing Factors</h2>
+                    <div class="factors-grid">
+                        {% for factor in concern.contributing_factors %}
+                        <div class="factor-card">
+                            <span class="factor-card__num">0{{ loop.index }}</span>
+                            <p class="factor-card__text">{{ factor }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <!-- 4. Available Treatment Options at DERMORA -->
+                <section class="detail-section" id="clinical-options">
+                    <span class="editorial-eyebrow">Verified In-Clinic Protocols</span>
+                    <h2 class="detail-section__title">Available Professional Treatment Options</h2>
+                    <p class="detail-section__note">
+                        <em>The following procedures represent verified clinical modalities offered at DERMORA to assist with this concern following individualized assessment.</em>
+                    </p>
+                    <div class="options-list">
+                        {% for option in concern.treatment_options %}
+                        <div class="option-item">
+                            <h3 class="option-item__title">{{ option.name }}</h3>
+                            <p class="option-item__detail">{{ option.detail }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <!-- 5. Treatment Limitations -->
+                <section class="detail-section detail-section--alert" id="limitations">
+                    <span class="editorial-eyebrow text-champagne-dark">Realistic Expectations</span>
+                    <h2 class="detail-section__title">Treatment Limitations</h2>
+                    <div class="detail-prose">
+                        <p>{{ concern.limitations }}</p>
+                    </div>
+                </section>
+
+                <!-- 6. When Medical Assessment is Appropriate -->
+                <section class="detail-section" id="medical-assessment">
+                    <span class="editorial-eyebrow text-champagne-dark">Physician Consultation</span>
+                    <h2 class="detail-section__title">When Professional Medical Assessment is Appropriate</h2>
+                    <div class="medical-alert-box">
+                        <div class="medical-alert-box__badge">&excl; Important Clinical Safeguard</div>
+                        <p class="medical-alert-box__text">{{ concern.medical_guidance }}</p>
+                    </div>
+                </section>
+
+                <!-- 7. Frequently Asked Questions -->
+                <section class="detail-section" id="faqs">
+                    <span class="editorial-eyebrow">Patient Inquiries</span>
+                    <h2 class="detail-section__title">Frequently Asked Questions</h2>
+                    <div class="faq-accordion-group">
+                        {% for faq in concern.faqs %}
+                        <div class="faq-item js-faq-item">
+                            <button type="button" class="faq-item__trigger js-faq-trigger" aria-expanded="false">
+                                <span class="faq-item__question">{{ faq.q }}</span>
+                                <span class="faq-item__icon" aria-hidden="true">&plus;</span>
+                            </button>
+                            <div class="faq-item__content js-faq-panel" hidden>
+                                <p class="faq-item__answer">{{ faq.a }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <!-- 8. Related Treatments (Direct Links) -->
+                {% if related_treatments %}
+                <section class="detail-section" id="related-treatments">
+                    <span class="editorial-eyebrow">Clinical Modalities</span>
+                    <h2 class="detail-section__title">Related Treatment Protocols at DERMORA</h2>
+                    <div class="related-treatments-grid">
+                        {% for t in related_treatments %}
+                        <div class="treatment-mini-card">
+                            <div class="treatment-mini-card__media">
+                                <img src="{{ url_for('static', filename='images/' ~ t.image) }}" alt="{{ t.name }}" loading="lazy">
+                            </div>
+                            <div class="treatment-mini-card__body">
+                                <span class="treatment-mini-card__category">{{ t.category_label }}</span>
+                                <h3 class="treatment-mini-card__title">{{ t.name }}</h3>
+                                <p class="treatment-mini-card__desc">{{ t.short_desc[:120] }}...</p>
+                                <a href="{{ url_for('treatment_detail', slug=t.slug) }}" class="btn btn--outline-dark btn--sm mt-2">
+                                    <span>Explore Protocol</span>
+                                    <span class="btn__arrow">&rarr;</span>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endif %}
+            </div>
+
+            <!-- Sticky Sidebar Information Panel -->
+            <aside class="detail-sidebar">
+                <div class="sticky-card">
+                    <div class="sticky-card__header">
+                        <span class="sticky-card__badge">Skin Concern</span>
+                        <h3 class="sticky-card__title">{{ concern.name }}</h3>
+                        <p class="sticky-card__meta">Primary Area: {{ concern.primary_area }}</p>
+                    </div>
+
+                    <div class="sticky-card__divider"></div>
+
+                    <div class="sticky-card__body">
+                        <h4 class="sticky-card__subheading">Recommended First Step</h4>
+                        <p class="sticky-card__body-text">
+                            Schedule a professional clinical evaluation. Our team in Gulberg III determines whether your concern is purely superficial or involves deeper biological or friction factors.
+                        </p>
+                    </div>
+
+                    <div class="sticky-card__cta">
+                        <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--champagne btn--full">
+                            <span>Book Consultation</span>
+                        </a>
+                        <a href="{{ url_for('concerns_overview') }}" class="btn btn--outline-dark btn--full btn--sm mt-3">
+                            <span>Browse All Concerns</span>
+                        </a>
+                    </div>
+
+                    <div class="sticky-card__footer">
+                        <p class="sticky-card__safety-notice">
+                            Clinical consultations in Lahore: Mon–Sat 10:00 AM – 08:00 PM.
+                        </p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- 9. Book Consultation CTA -->
+        <div class="detail-closing-cta">
+            <div class="detail-closing-cta__inner">
+                <span class="editorial-eyebrow">Dermatological Guidance</span>
+                <h2 class="detail-closing-cta__title">
+                    Gain clarity on your skin's health.
+                </h2>
+                <p class="detail-closing-cta__text">
+                    Arrange a private, unhurried assessment with our certified practitioners in Gulberg III, Lahore.
+                </p>
+                <div class="detail-closing-cta__actions">
+                    <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--champagne-pill">
+                        <span>Schedule Clinical Assessment</span>
+                        <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+                    </a>
+                    <a href="{{ url_for('concerns_overview') }}" class="btn btn--glass-pill">
+                        <span>Back to All Concerns</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

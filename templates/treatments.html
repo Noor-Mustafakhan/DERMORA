@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Clinical Treatments &amp; Aesthetic Protocols | DERMORA Lahore{% endblock %}
+
+{% block content %}
+<!-- Page Header / Hero -->
+<section class="page-hero section--forest">
+    <div class="page-hero__bg-wrap">
+        <img 
+            src="{{ url_for('static', filename='images/editorial-laser.jpg') }}" 
+            alt="DERMORA Clinical Treatments &amp; Protocols" 
+            class="page-hero__bg"
+            loading="eager"
+            width="1440"
+            height="500"
+        >
+        <div class="page-hero__overlay" aria-hidden="true"></div>
+    </div>
+
+    <div class="container page-hero__content">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol class="breadcrumbs__list">
+                <li class="breadcrumbs__item"><a href="{{ url_for('index') }}" class="breadcrumbs__link">Home</a></li>
+                <li class="breadcrumbs__separator" aria-hidden="true">&rsaquo;</li>
+                <li class="breadcrumbs__item"><span class="breadcrumbs__current" aria-current="page">Treatments</span></li>
+            </ol>
+        </nav>
+
+        <span class="editorial-eyebrow text-champagne">Clinical Protocols &bull; Melanin Calibrated</span>
+        <h1 class="page-hero__title">
+            Discover the right care for your skin.
+        </h1>
+        <p class="page-hero__subtitle">
+            Explore personalised skincare and aesthetic treatments designed with your skin's biological needs in mind.
+            All procedures are calibrated for South Asian phototypes to preserve dermal integrity.
+        </p>
+
+        <div class="page-hero__actions">
+            <a href="#treatment-grid" class="btn btn--champagne-pill">
+                <span>Explore Treatments</span>
+                <span class="btn__arrow" aria-hidden="true">&darr;</span>
+            </a>
+            <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--glass-pill">
+                <span>Book Consultation</span>
+                <span class="btn__sparkle" aria-hidden="true">&rarr;</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Filter Navigation & Grid -->
+<section class="section section--ivory" id="treatment-grid">
+    <div class="container">
+        <!-- Interactive Category Filter -->
+        <div class="filter-bar" role="toolbar" aria-label="Filter treatments by category">
+            <button type="button" class="filter-btn is-active js-filter-btn" data-filter="all">
+                All Protocols ({{ treatments|length }})
+            </button>
+            <button type="button" class="filter-btn js-filter-btn" data-filter="facial">
+                Facial Treatments
+            </button>
+            <button type="button" class="filter-btn js-filter-btn" data-filter="laser">
+                Laser Treatments
+            </button>
+            <button type="button" class="filter-btn js-filter-btn" data-filter="targeted">
+                Targeted Skin Areas
+            </button>
+        </div>
+
+        <!-- Treatment Cards Grid -->
+        <div class="treatment-catalog-grid js-treatment-grid">
+            {% for slug, t in treatments.items() %}
+            <article class="treatment-catalog-card js-treatment-card" data-category="{{ t.category }}">
+                <div class="treatment-catalog-card__media">
+                    <img 
+                        src="{{ url_for('static', filename='images/' ~ t.image) }}" 
+                        alt="{{ t.name }}" 
+                        class="treatment-catalog-card__img"
+                        loading="lazy"
+                        width="600"
+                        height="400"
+                    >
+                    <span class="treatment-catalog-card__badge">{{ t.category_label }}</span>
+                </div>
+
+                <div class="treatment-catalog-card__body">
+                    <span class="treatment-catalog-card__concern-label">Addresses</span>
+                    <p class="treatment-catalog-card__concern-text">{{ t.primary_concern }}</p>
+                    
+                    <h2 class="treatment-catalog-card__title">
+                        <a href="{{ url_for('treatment_detail', slug=slug) }}" class="treatment-catalog-card__title-link">
+                            {{ t.name }}
+                        </a>
+                    </h2>
+
+                    <p class="treatment-catalog-card__desc">
+                        {{ t.short_desc }}
+                    </p>
+
+                    <div class="treatment-catalog-card__meta">
+                        <div class="meta-item">
+                            <span class="meta-item__label">Duration</span>
+                            <span class="meta-item__val">{{ t.duration }}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-item__label">Downtime</span>
+                            <span class="meta-item__val">{{ t.downtime }}</span>
+                        </div>
+                    </div>
+
+                    <div class="treatment-catalog-card__action">
+                        <a href="{{ url_for('treatment_detail', slug=slug) }}" class="btn btn--outline-dark btn--sm treatment-catalog-card__btn">
+                            <span>Explore Details</span>
+                            <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        <!-- Consultation Banner Callout -->
+        <div class="treatment-consult-callout">
+            <div class="treatment-consult-callout__inner">
+                <div class="treatment-consult-callout__content">
+                    <span class="editorial-eyebrow">Personalized Prescription</span>
+                    <h3 class="treatment-consult-callout__title">Unsure which protocol fits your skin phototype?</h3>
+                    <p class="treatment-consult-callout__text">
+                        Every patient's skin biology is unique. Our clinical practitioners in Gulberg III perform a comprehensive 
+                        evaluation before recommending any treatment or wavelength.
+                    </p>
+                </div>
+                <div class="treatment-consult-callout__action">
+                    <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--champagne">
+                        <span>Schedule Clinical Assessment</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Frequently Asked Questions | Clinical &amp; Practical FAQs | DERMORA Lahore{% endblock %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero section--forest">
+    <div class="page-hero__bg-wrap">
+        <img 
+            src="{{ url_for('static', filename='images/editorial-consult.jpg') }}" 
+            alt="DERMORA Clinical FAQs &amp; Inquiries" 
+            class="page-hero__bg"
+            loading="eager"
+            width="1440"
+            height="500"
+        >
+        <div class="page-hero__overlay" aria-hidden="true"></div>
+    </div>
+
+    <div class="container page-hero__content">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol class="breadcrumbs__list">
+                <li class="breadcrumbs__item"><a href="{{ url_for('index') }}" class="breadcrumbs__link">Home</a></li>
+                <li class="breadcrumbs__separator" aria-hidden="true">&rsaquo;</li>
+                <li class="breadcrumbs__item"><span class="breadcrumbs__current" aria-current="page">Frequently Asked Questions</span></li>
+            </ol>
+        </nav>
+
+        <span class="editorial-eyebrow text-champagne">Clarity &bull; Patient Education</span>
+        <h1 class="page-hero__title">
+            Answers to your dermatological questions.
+        </h1>
+        <p class="page-hero__subtitle">
+            Transparent, evidence-based answers regarding our clinical standards, South Asian phototype safety, appointment policies, and pricing.
+        </p>
+
+        <div class="page-hero__actions">
+            <a href="#faq-sections" class="btn btn--champagne-pill">
+                <span>Browse Categories</span>
+                <span class="btn__arrow" aria-hidden="true">&darr;</span>
+            </a>
+            <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--glass-pill">
+                <span>Ask a Question</span>
+                <span class="btn__sparkle" aria-hidden="true">&rarr;</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FAQs Categorized Section -->
+<section class="section section--ivory" id="faq-sections">
+    <div class="container">
+        <!-- Category Jump Bar -->
+        <div class="faq-category-nav" role="navigation" aria-label="FAQ Category Navigation">
+            <a href="#cat-general" class="faq-nav-chip">General</a>
+            <a href="#cat-treatments" class="faq-nav-chip">Treatments &amp; Safety</a>
+            <a href="#cat-appointments" class="faq-nav-chip">Appointments</a>
+            <a href="#cat-pricing" class="faq-nav-chip">Pricing &amp; Packages</a>
+        </div>
+
+        <div class="faq-sections-wrapper">
+            {% for cat_key, cat in faqs_by_category.items() %}
+            <div class="faq-category-block" id="cat-{{ cat_key }}">
+                <div class="faq-category-block__header">
+                    <span class="editorial-eyebrow">{{ cat_key|upper }}</span>
+                    <h2 class="faq-category-block__title">{{ cat.title }}</h2>
+                    <p class="faq-category-block__desc">{{ cat.desc }}</p>
+                </div>
+
+                <div class="faq-accordion-group">
+                    {% for item in cat['items'] %}
+                    <div class="faq-item js-faq-item">
+                        <button type="button" class="faq-item__trigger js-faq-trigger" aria-expanded="false">
+                            <span class="faq-item__question">{{ item.q }}</span>
+                            <span class="faq-item__icon" aria-hidden="true">&plus;</span>
+                        </button>
+                        <div class="faq-item__content js-faq-panel" hidden>
+                            <p class="faq-item__answer">{{ item.a }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Closing Inquiry Callout -->
+        <div class="treatment-consult-callout mt-16">
+            <div class="treatment-consult-callout__inner">
+                <div class="treatment-consult-callout__content">
+                    <span class="editorial-eyebrow">Have an Unanswered Question?</span>
+                    <h3 class="treatment-consult-callout__title">Our clinical concierge team is here to assist.</h3>
+                    <p class="treatment-consult-callout__text">
+                        Whether you have questions regarding a specific skin condition or wish to learn more about our Nd:YAG laser parameters, we are pleased to help.
+                    </p>
+                </div>
+                <div class="treatment-consult-callout__action">
+                    <a href="{{ url_for('contact_page') }}" class="btn btn--champagne">
+                        <span>Contact Our Concierge</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

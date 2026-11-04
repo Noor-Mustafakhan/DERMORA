@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+
+{% block title %}Results Journal &amp; Clinical Progress | DERMORA Lahore{% endblock %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero section--forest">
+    <div class="page-hero__bg-wrap">
+        <img 
+            src="{{ url_for('static', filename='images/editorial-portrait-1.jpg') }}" 
+            alt="DERMORA Results Journal &amp; Skin Progress" 
+            class="page-hero__bg"
+            loading="eager"
+            width="1440"
+            height="500"
+        >
+        <div class="page-hero__overlay" aria-hidden="true"></div>
+    </div>
+
+    <div class="container page-hero__content">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol class="breadcrumbs__list">
+                <li class="breadcrumbs__item"><a href="{{ url_for('index') }}" class="breadcrumbs__link">Home</a></li>
+                <li class="breadcrumbs__separator" aria-hidden="true">&rsaquo;</li>
+                <li class="breadcrumbs__item"><span class="breadcrumbs__current" aria-current="page">Results Journal</span></li>
+            </ol>
+        </nav>
+
+        <span class="editorial-eyebrow text-champagne">Documented Progress &bull; Authentic Documentation</span>
+        <h1 class="page-hero__title">
+            Real skin journeys. Individual experiences.
+        </h1>
+        <p class="page-hero__subtitle">
+            A transparent clinical journal documenting verified skin journeys. 
+            All clinical cases reflect patient consent and unretouched photography under standardized cross-polarized lighting.
+        </p>
+
+        <div class="page-hero__actions">
+            <a href="#interactive-slider" class="btn btn--champagne-pill">
+                <span>View Comparison Slider</span>
+                <span class="btn__arrow" aria-hidden="true">&darr;</span>
+            </a>
+            <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--glass-pill">
+                <span>Book Your Assessment</span>
+                <span class="btn__sparkle" aria-hidden="true">&rarr;</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Interactive Comparison Slider Section -->
+<section class="section section--ivory" id="interactive-slider">
+    <div class="container">
+        <div class="section-intro text-center">
+            <span class="editorial-eyebrow">Interactive Clinical Verification</span>
+            <h2 class="section-heading">Featured Patient Progression</h2>
+            <p class="section-subtext">
+                Drag the divider below to inspect the progressive reduction of post-inflammatory hyperpigmentation and barrier refinement.
+            </p>
+        </div>
+
+        <!-- Draggable Comparison Slider -->
+        <div class="results-slider-wrap">
+            <div class="results-slider js-results-slider" role="region" aria-label="Interactive before and after comparison">
+                <!-- After Image (Background) -->
+                <div class="results-slider__after">
+                    <img 
+                        src="{{ url_for('static', filename='images/results-after.jpg') }}" 
+                        alt="Skin condition after 4 clinical sessions" 
+                        class="results-slider__img"
+                        draggable="false"
+                    >
+                    <span class="results-slider__tag results-slider__tag--after">After (4 Sessions)</span>
+                </div>
+
+                <!-- Before Image (Clipped Overlay) -->
+                <div class="results-slider__before js-slider-before">
+                    <img 
+                        src="{{ url_for('static', filename='images/results-before.jpg') }}" 
+                        alt="Baseline skin condition before clinical treatment" 
+                        class="results-slider__img js-slider-before-img"
+                        draggable="false"
+                    >
+                    <span class="results-slider__tag results-slider__tag--before">Baseline</span>
+                </div>
+
+                <!-- Draggable Divider Handle -->
+                <div class="results-slider__handle js-slider-handle" aria-hidden="true">
+                    <div class="results-slider__line"></div>
+                    <div class="results-slider__button">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Native Range Input for Complete Accessibility & Touch Dragging -->
+                <input 
+                    type="range" 
+                    min="0" 
+                    max="100" 
+                    value="50" 
+                    class="results-slider__range js-slider-range" 
+                    aria-label="Drag slider to compare before and after treatment images"
+                >
+            </div>
+
+            <!-- Case Study Context Panel -->
+            <div class="results-case-meta">
+                <div class="case-meta-grid">
+                    <div class="case-meta-item">
+                        <span class="case-meta-item__label">Protocol:</span>
+                        <span class="case-meta-item__val">Low-Fluence Nd:YAG Laser Toning &amp; HydraFacial Boosters</span>
+                    </div>
+                    <div class="case-meta-item">
+                        <span class="case-meta-item__label">Indication:</span>
+                        <span class="case-meta-item__val">Post-Acne Hyperpigmentation (PIH) &amp; Rough Texture</span>
+                    </div>
+                    <div class="case-meta-item">
+                        <span class="case-meta-item__label">Timeline:</span>
+                        <span class="case-meta-item__val">12 Weeks (4 In-Clinic Sessions &bull; Daily Mineral SPF 50+)</span>
+                    </div>
+                    <div class="case-meta-item">
+                        <span class="case-meta-item__label">Patient Phototype:</span>
+                        <span class="case-meta-item__val">Fitzpatrick Type IV (Melanin-Dense South Asian)</span>
+                    </div>
+                </div>
+                <p class="results-case-note">
+                    *Clinical progress achieved through non-thermal laser toning paired with ceramide barrier restoration. 
+                    Individual results vary according to endocrine stability, skin phototype, and daily photoprotection adherence.
+                </p>
+            </div>
+        </div>
+
+        <!-- Ethical Consent & Privacy Callout -->
+        <div class="results-ethics-card">
+            <div class="results-ethics-card__inner">
+                <span class="editorial-eyebrow">Medical Ethics &bull; Patient Confidentiality</span>
+                <h3 class="results-ethics-card__title">Patient Rights &amp; Unretouched Photography Standards</h3>
+                <p class="results-ethics-card__text">
+                    At DERMORA, we never fabricate results, use filters, or publish AI-synthesized clinical outcomes. 
+                    Every image in our clinical archive is recorded with documented written patient consent under identical standardized 
+                    lighting and cross-polarized medical photography. Individual variation is natural and expected in human dermatology.
+                </p>
+            </div>
+        </div>
+
+        <!-- Results Category Journal Grid -->
+        <div class="results-category-section">
+            <div class="section-intro text-center">
+                <span class="editorial-eyebrow">Documented Clinical Areas</span>
+                <h2 class="section-heading">Browse Case Studies by Category</h2>
+            </div>
+
+            <div class="results-cards-grid">
+                <!-- Case 1: Facial Treatments -->
+                <article class="journal-card">
+                    <div class="journal-card__media">
+                        <img src="{{ url_for('static', filename='images/treatment-hydrafacial.jpg') }}" alt="Facial treatment case study" loading="lazy">
+                        <span class="journal-card__badge">Facial Treatments</span>
+                    </div>
+                    <div class="journal-card__body">
+                        <span class="journal-card__concern">Congestion &amp; Dullness</span>
+                        <h3 class="journal-card__title">HydraFacial MD Elite Vortex Purification</h3>
+                        <p class="journal-card__desc">
+                            Documented 60-day recovery of an environmentally fatigued complexion following a series of 2 HydraFacial sessions and barrier seal.
+                        </p>
+                        <a href="{{ url_for('treatment_detail', slug='hydrafacial') }}" class="journal-card__link">
+                            <span>Explore HydraFacial Protocol</span>
+                            <span class="arrow">&rarr;</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Case 2: Laser Treatments -->
+                <article class="journal-card">
+                    <div class="journal-card__media">
+                        <img src="{{ url_for('static', filename='images/treatment-laser-hair.jpg') }}" alt="Laser hair reduction case study" loading="lazy">
+                        <span class="journal-card__badge">Laser Treatments</span>
+                    </div>
+                    <div class="journal-card__body">
+                        <span class="journal-card__concern">Pseudofolliculitis &amp; Hair Reduction</span>
+                        <h3 class="journal-card__title">Long-Pulsed Nd:YAG 1064nm Course</h3>
+                        <p class="journal-card__desc">
+                            Complete resolution of painful chronic ingrown hairs and rough bumps across 6 calibrated laser sessions with contact chilling.
+                        </p>
+                        <a href="{{ url_for('treatment_detail', slug='laser-treatments') }}" class="journal-card__link">
+                            <span>Explore Laser Protocols</span>
+                            <span class="arrow">&rarr;</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Case 3: Pigmentation -->
+                <article class="journal-card">
+                    <div class="journal-card__media">
+                        <img src="{{ url_for('static', filename='images/concern-pigmentation.jpg') }}" alt="Pigmentation clarification case study" loading="lazy">
+                        <span class="journal-card__badge">Pigmentation</span>
+                    </div>
+                    <div class="journal-card__body">
+                        <span class="journal-card__concern">Melasma &amp; Solar Tanning</span>
+                        <h3 class="journal-card__title">Gradual Melanin Dispersion Pathway</h3>
+                        <p class="journal-card__desc">
+                            Structured 16-week journey combining acoustic laser toning and non-irritating mandelic acid for stubborn cheek pigmentation.
+                        </p>
+                        <a href="{{ url_for('concern_detail', slug='pigmentation') }}" class="journal-card__link">
+                            <span>Explore Pigmentation Guide</span>
+                            <span class="arrow">&rarr;</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Case 4: Targeted Skin Areas -->
+                <article class="journal-card">
+                    <div class="journal-card__media">
+                        <img src="{{ url_for('static', filename='images/thumb-elbows.jpg') }}" alt="Targeted skin areas joint smoothing" loading="lazy">
+                        <span class="journal-card__badge">Targeted Skin Areas</span>
+                    </div>
+                    <div class="journal-card__body">
+                        <span class="journal-card__concern">Joint Hyperkeratosis</span>
+                        <h3 class="journal-card__title">Dark Elbows &amp; Joint Callus Softening</h3>
+                        <p class="journal-card__desc">
+                            Restoration of pliable, soft skin over high-friction elbow joints using medical-strength keratolytics and barrier balm.
+                        </p>
+                        <a href="{{ url_for('treatment_detail', slug='dark-elbows') }}" class="journal-card__link">
+                            <span>Explore Elbow Smoothing</span>
+                            <span class="arrow">&rarr;</span>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

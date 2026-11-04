@@ -1,0 +1,263 @@
+{% extends "base.html" %}
+
+{% block title %}Contact &amp; Clinic Suite | DERMORA Gulberg III Lahore{% endblock %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero section--forest">
+    <div class="page-hero__bg-wrap">
+        <img 
+            src="{{ url_for('static', filename='images/clinic-interior.jpg') }}" 
+            alt="DERMORA Clinic Suite in Lahore" 
+            class="page-hero__bg"
+            loading="eager"
+            width="1440"
+            height="500"
+        >
+        <div class="page-hero__overlay" aria-hidden="true"></div>
+    </div>
+
+    <div class="container page-hero__content">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol class="breadcrumbs__list">
+                <li class="breadcrumbs__item"><a href="{{ url_for('index') }}" class="breadcrumbs__link">Home</a></li>
+                <li class="breadcrumbs__separator" aria-hidden="true">&rsaquo;</li>
+                <li class="breadcrumbs__item"><span class="breadcrumbs__current" aria-current="page">Contact</span></li>
+            </ol>
+        </nav>
+
+        <span class="editorial-eyebrow text-champagne">Clinic Concierge &bull; Gulberg III, Lahore</span>
+        <h1 class="page-hero__title">
+            Begin your skin conversation with us.
+        </h1>
+        <p class="page-hero__subtitle">
+            Schedule an in-person assessment, speak with our clinical concierge, or inquire about our specialized protocols.
+            We look forward to welcoming you to our clinic suite.
+        </p>
+
+        <div class="page-hero__actions">
+            <a href="#consultation" class="btn btn--champagne-pill">
+                <span>Book Consultation</span>
+                <span class="btn__arrow" aria-hidden="true">&darr;</span>
+            </a>
+            <a href="tel:{{ contact_phone }}" class="btn btn--glass-pill">
+                <span>Call Clinic Directly</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Contact & Consultation Layout -->
+<section class="section section--ivory" id="consultation">
+    <div class="container">
+        <div class="contact-grid">
+            <!-- Left: Contact Details & Location Card -->
+            <div class="contact-info-panel">
+                <span class="editorial-eyebrow">Clinic Suite Details</span>
+                <h2 class="contact-info-panel__title">We are located in Gulberg III, Lahore.</h2>
+                <p class="contact-info-panel__desc">
+                    Situated in the heart of Lahore, our clinic suite provides a discreet, tranquil environment designed for private consultations and treatments.
+                </p>
+
+                <div class="contact-channels">
+                    <div class="contact-channel-item">
+                        <div class="channel-icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                        </div>
+                        <div class="channel-details">
+                            <span class="channel-label">Telephone Direct</span>
+                            <a href="tel:{{ contact_phone }}" class="channel-val">{{ contact_phone }}</a>
+                            <span class="channel-sub">Mon–Sat: 10:00 AM – 08:00 PM</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-channel-item">
+                        <div class="channel-icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <div class="channel-details">
+                            <span class="channel-label">Email Concierge</span>
+                            <a href="mailto:{{ contact_email }}" class="channel-val">{{ contact_email }}</a>
+                            <span class="channel-sub">Inquiries answered within 24 business hours</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-channel-item">
+                        <div class="channel-icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                            </svg>
+                        </div>
+                        <div class="channel-details">
+                            <span class="channel-label">WhatsApp Inquiries</span>
+                            <a href="https://wa.me/923000000000" target="_blank" rel="noopener noreferrer" class="channel-val">+92 300 0000000</a>
+                            <span class="channel-sub">Quick scheduling and location sharing</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-channel-item">
+                        <div class="channel-icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="channel-details">
+                            <span class="channel-label">Physical Address</span>
+                            <span class="channel-val">{{ clinic_location }}</span>
+                            <span class="channel-sub">Complimentary valet parking available</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clinic Hours Card -->
+                <div class="hours-card">
+                    <h3 class="hours-card__title">Consultation Hours</h3>
+                    <ul class="hours-list">
+                        <li class="hours-row">
+                            <span class="hours-row__day">Monday &ndash; Friday</span>
+                            <span class="hours-row__time">10:00 AM &ndash; 08:00 PM</span>
+                        </li>
+                        <li class="hours-row">
+                            <span class="hours-row__day">Saturday</span>
+                            <span class="hours-row__time">10:00 AM &ndash; 07:00 PM</span>
+                        </li>
+                        <li class="hours-row">
+                            <span class="hours-row__day">Sunday</span>
+                            <span class="hours-row__time">Sanitized Deep Maintenance (Closed)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Location Map Card -->
+                <div class="location-map-card">
+                    <div class="location-map-card__header">
+                        <span class="location-map-card__tag">Google Maps Location</span>
+                        <h4 class="location-map-card__title">Gulberg III Medical Corridor, Lahore</h4>
+                    </div>
+                    <div class="location-map-card__body">
+                        <p class="text-sm text-charcoal-muted">
+                            Located off Main Boulevard, Gulberg III. Verified location pins and directions will be sent directly via WhatsApp upon appointment confirmation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Interactive Contact & Consultation Form -->
+            <div class="contact-form-panel">
+                <span class="editorial-eyebrow">Personalized Inquiry</span>
+                <h2 class="contact-form-panel__title">Request a Consultation</h2>
+                <p class="contact-form-panel__sub">
+                    Complete the form below. Our clinic concierge will contact you to confirm a mutually convenient appointment slot.
+                </p>
+
+                <!-- Interactive Form -->
+                <form class="interactive-form js-contact-form" novalidate>
+                    <!-- Form Preview Notice Banner -->
+                    <div class="form-phase-notice">
+                        <span class="form-phase-notice__badge">Clinical Inquiry Protocol</span>
+                        <p class="form-phase-notice__text">
+                            This form validates required fields and demonstrates client-side data capture. Inquiries are confirmed directly by our clinic concierge in Gulberg III, Lahore via phone or WhatsApp.
+                        </p>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="f-fullname" class="form-label">Full Name <span class="text-red-500">*</span></label>
+                            <input 
+                                type="text" 
+                                id="f-fullname" 
+                                name="fullname" 
+                                class="form-control js-form-input" 
+                                placeholder="Your full name"
+                                required
+                            >
+                            <span class="form-error js-error-fullname" hidden>Please provide your full name.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="f-phone" class="form-label">Phone or WhatsApp <span class="text-red-500">*</span></label>
+                            <input 
+                                type="tel" 
+                                id="f-phone" 
+                                name="phone" 
+                                class="form-control js-form-input" 
+                                placeholder="+92 300 1234567"
+                                required
+                            >
+                            <span class="form-error js-error-phone" hidden>Please provide a valid contact number.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="f-email" class="form-label">Email Address <span class="text-red-500">*</span></label>
+                            <input 
+                                type="email" 
+                                id="f-email" 
+                                name="email" 
+                                class="form-control js-form-input" 
+                                placeholder="you@domain.com"
+                                required
+                            >
+                            <span class="form-error js-error-email" hidden>Please provide a valid email address.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="f-subject" class="form-label">Primary Interest <span class="text-red-500">*</span></label>
+                            <select id="f-subject" name="subject" class="form-control js-form-input" required>
+                                <option value="" disabled selected>Select treatment or concern</option>
+                                <option value="HydraFacial MD Elite">HydraFacial MD Elite</option>
+                                <option value="Calibrated Laser Hair Reduction">Calibrated Laser Hair Reduction</option>
+                                <option value="BB Glow Meso-Infusion">BB Glow Meso-Infusion</option>
+                                <option value="Targeted Dark Areas (Knuckles/Underarms/Elbows)">Targeted Dark Areas (Knuckles/Underarms/Elbows)</option>
+                                <option value="Melasma & Hyperpigmentation">Melasma &amp; Hyperpigmentation</option>
+                                <option value="Acne & Barrier Clarification">Acne &amp; Barrier Clarification</option>
+                                <option value="General Doctor Consultation">General Doctor Consultation &amp; Assessment</option>
+                            </select>
+                            <span class="form-error js-error-subject" hidden>Please select your primary interest.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="f-message" class="form-label">Message or Skin Notes (Optional)</label>
+                        <textarea 
+                            id="f-message" 
+                            name="message" 
+                            rows="4" 
+                            class="form-control" 
+                            placeholder="Tell us about your skin history, past treatments, or any specific questions..."
+                        ></textarea>
+                    </div>
+
+                    <div class="form-action">
+                        <button type="submit" class="btn btn--champagne btn--full js-form-submit">
+                            <span>Request Clinical Consultation</span>
+                        </button>
+                    </div>
+
+                    <!-- Client-Side Success Feedback State -->
+                    <div class="form-feedback-card js-form-feedback" hidden>
+                        <div class="form-feedback-card__icon">&#10003;</div>
+                        <h4 class="form-feedback-card__title">Consultation Request Preview Recorded</h4>
+                        <p class="form-feedback-card__text">
+                            Thank you, <strong class="js-feedback-name">Patient</strong>. Your consultation inquiry for 
+                            <strong class="js-feedback-subject">treatment</strong> has been validated. 
+                            Our clinic concierge in Gulberg III will reach out to confirm your slot.
+                        </p>
+                        <span class="form-feedback-card__sub text-xs text-charcoal-muted">
+                            (Demonstration mode: No personal patient data was permanently stored).
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

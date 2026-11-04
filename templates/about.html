@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+
+{% block title %}About DERMORA | Clinical Philosophy &amp; Practice | Lahore{% endblock %}
+
+{% block content %}
+<!-- Section 1 — About Hero -->
+<section class="page-hero section--forest">
+    <div class="page-hero__bg-wrap">
+        <img 
+            src="{{ url_for('static', filename='images/clinic-interior.jpg') }}" 
+            alt="DERMORA Clinic Interior &amp; Suite" 
+            class="page-hero__bg"
+            loading="eager"
+            width="1440"
+            height="500"
+        >
+        <div class="page-hero__overlay" aria-hidden="true"></div>
+    </div>
+
+    <div class="container page-hero__content">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol class="breadcrumbs__list">
+                <li class="breadcrumbs__item"><a href="{{ url_for('index') }}" class="breadcrumbs__link">Home</a></li>
+                <li class="breadcrumbs__separator" aria-hidden="true">&rsaquo;</li>
+                <li class="breadcrumbs__item"><span class="breadcrumbs__current" aria-current="page">About DERMORA</span></li>
+            </ol>
+        </nav>
+
+        <span class="editorial-eyebrow text-champagne">Clinical Excellence &bull; Biological Respect</span>
+        <h1 class="page-hero__title">
+            Thoughtful skincare. Professional care.
+        </h1>
+        <p class="page-hero__subtitle">
+            Founded in Lahore, DERMORA bridges medical dermatological expertise with editorial luxury.
+            We honor the unique biology, depth, and resilience of South Asian skin phototypes.
+        </p>
+
+        <div class="page-hero__actions">
+            <a href="#our-story" class="btn btn--champagne-pill">
+                <span>Our Philosophy</span>
+                <span class="btn__arrow" aria-hidden="true">&darr;</span>
+            </a>
+            <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--glass-pill">
+                <span>Schedule Consultation</span>
+                <span class="btn__sparkle" aria-hidden="true">&rarr;</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Section 2 — Our Story -->
+<section class="section section--ivory" id="our-story">
+    <div class="container">
+        <div class="about-story-grid">
+            <div class="about-story-grid__media">
+                <img 
+                    src="{{ url_for('static', filename='images/editorial-laser.jpg') }}" 
+                    alt="Authentic South Asian skin clinical laser protocol" 
+                    class="about-story-img"
+                    loading="lazy"
+                >
+                <div class="about-story-badge">
+                    <span>Calibrated for Melanin Phototypes III–VI</span>
+                </div>
+            </div>
+
+            <div class="about-story-grid__text">
+                <span class="editorial-eyebrow">Our Origin &amp; Philosophy</span>
+                <h2 class="section-heading text-left">
+                    Dermatology designed around your skin, not generic templates.
+                </h2>
+                <div class="detail-prose">
+                    <p>
+                        For too long, aesthetic clinics in South Asia have imported western protocols uncalibrated for 
+                        melanin-dense skin, or relied upon aggressive, unsafe chemical bleaches that temporarily mask concerns 
+                        while causing long-term cellular trauma, barrier depletion, and rebound hyperpigmentation.
+                    </p>
+                    <p>
+                        DERMORA was created to introduce a different standard: <strong>Modern Clinical Luxury with Editorial Beauty</strong>. 
+                        We believe skin is complex living biology, not an artificial canvas to be aggressively stripped. 
+                        Our protocols work in harmony with your natural acid mantle, respecting melanin depth and focusing 
+                        on true cellular health, clear pores, and luminous vitality.
+                    </p>
+                </div>
+
+                <div class="about-quote-box">
+                    <blockquote class="about-quote">
+                        &ldquo;We reject the pursuit of artificial, bleached ideals. True luxury in skincare is radiant, healthy skin that feels comfortable, resilient, and unmistakably yours.&rdquo;
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 3 — Our Approach -->
+<section class="section section--forest-dark text-ivory" id="our-approach">
+    <div class="container">
+        <div class="section-intro text-center">
+            <span class="editorial-eyebrow text-champagne">The DERMORA Standard</span>
+            <h2 class="section-heading text-ivory">Our Clinical Approach</h2>
+            <p class="section-subtext text-sage">
+                Five non-negotiable principles that govern every patient consultation, procedure, and follow-up.
+            </p>
+        </div>
+
+        <div class="approach-pillars-grid">
+            <div class="pillar-card">
+                <span class="pillar-card__num">01</span>
+                <h3 class="pillar-card__title">Personalised Consultation</h3>
+                <p class="pillar-card__desc">
+                    We dedicate unhurried clinical time to listen to your history, lifestyle, past reactions, and aesthetic goals.
+                </p>
+            </div>
+
+            <div class="pillar-card">
+                <span class="pillar-card__num">02</span>
+                <h3 class="pillar-card__title">Skin Phototype Assessment</h3>
+                <p class="pillar-card__desc">
+                    Fitzpatrick phototyping and cross-polarized analysis determine exact melanin density and PIH risk before any device is selected.
+                </p>
+            </div>
+
+            <div class="pillar-card">
+                <span class="pillar-card__num">03</span>
+                <h3 class="pillar-card__title">Treatment Planning</h3>
+                <p class="pillar-card__desc">
+                    Multi-session pathways structured with clear clinical milestones, avoiding aggressive shortcuts that compromise barrier integrity.
+                </p>
+            </div>
+
+            <div class="pillar-card">
+                <span class="pillar-card__num">04</span>
+                <h3 class="pillar-card__title">Patient Comfort &amp; Safety</h3>
+                <p class="pillar-card__desc">
+                    Sub-zero sapphire contact cooling, pharmaceutical-grade topical anesthetics when indicated, and soothing post-care compresses.
+                </p>
+            </div>
+
+            <div class="pillar-card">
+                <span class="pillar-card__num">05</span>
+                <h3 class="pillar-card__title">Professional Medical Ethics</h3>
+                <p class="pillar-card__desc">
+                    Transparent expectations, zero false promises, and open medical counseling regarding which concerns require clinical physician referral.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 4 — Practitioners -->
+<section class="section section--ivory" id="practitioners">
+    <div class="container">
+        <div class="section-intro text-center">
+            <span class="editorial-eyebrow">Clinical Leadership</span>
+            <h2 class="section-heading">Our Clinical Team</h2>
+            <p class="section-subtext">
+                Practitioners with verified qualifications dedicated to evidence-based dermatology and patient safety.
+            </p>
+        </div>
+
+        <div class="practitioners-grid">
+            <!-- Practitioner 1 -->
+            <article class="practitioner-card">
+                <div class="practitioner-card__media">
+                    <img 
+                        src="{{ url_for('static', filename='images/editorial-consult.jpg') }}" 
+                        alt="Senior Aesthetic Dermatology Practitioner" 
+                        class="practitioner-card__img"
+                        loading="lazy"
+                    >
+                </div>
+                <div class="practitioner-card__body">
+                    <span class="practitioner-card__role">Clinical Lead &bull; Aesthetic Dermatology</span>
+                    <h3 class="practitioner-card__name">Lead Clinical Dermatologist</h3>
+                    <p class="practitioner-card__creds">MBBS, FCPS (Dermatology), Fellow in Laser &amp; Aesthetic Medicine</p>
+                    <p class="practitioner-card__bio">
+                        Over 12 years of specialized clinical experience treating complex hyperpigmentation, melasma, 
+                        and laser applications across South Asian phototypes. Committed to conservative, non-scarring protocols.
+                    </p>
+                </div>
+            </article>
+
+            <!-- Practitioner 2 -->
+            <article class="practitioner-card">
+                <div class="practitioner-card__media">
+                    <img 
+                        src="{{ url_for('static', filename='images/editorial-laser.jpg') }}" 
+                        alt="Senior Laser Safety Specialist" 
+                        class="practitioner-card__img"
+                        loading="lazy"
+                    >
+                </div>
+                <div class="practitioner-card__body">
+                    <span class="practitioner-card__role">Senior Laser Specialist</span>
+                    <h3 class="practitioner-card__name">Certified Laser Safety Officer</h3>
+                    <p class="practitioner-card__creds">BSc Clinical Medicine, Certified Aesthetic Laser Practitioner</p>
+                    <p class="practitioner-card__bio">
+                        Specializes in optical physics, Nd:YAG 1064nm calibration, and contact cooling management. 
+                        Dedicated to ensuring safe, painless hair reduction and phototoning for melanin-dense skin.
+                    </p>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- Section 5 — Clinic Environment -->
+<section class="section section--ivory-light" id="clinic-environment">
+    <div class="container">
+        <div class="section-intro text-center">
+            <span class="editorial-eyebrow">Our Sanctuary</span>
+            <h2 class="section-heading">The Clinic Environment</h2>
+            <p class="section-subtext">
+                Designed to provide an unhurried, serene atmosphere in the heart of Gulberg III, Lahore.
+            </p>
+        </div>
+
+        <div class="environment-grid">
+            <div class="environment-card">
+                <div class="environment-card__media">
+                    <img src="{{ url_for('static', filename='images/clinic-interior.jpg') }}" alt="DERMORA clinic suite interior" loading="lazy">
+                </div>
+                <div class="environment-card__content">
+                    <h3 class="environment-card__title">Private Treatment Suites</h3>
+                    <p class="environment-card__text">
+                        Acoustically insulated private suites equipped with ergonomic treatment beds, medical-grade lighting, and individual temperature regulation.
+                    </p>
+                </div>
+            </div>
+
+            <div class="environment-card">
+                <div class="environment-card__media">
+                    <img src="{{ url_for('static', filename='images/editorial-laser.jpg') }}" alt="Medical laser suite" loading="lazy">
+                </div>
+                <div class="environment-card__content">
+                    <h3 class="environment-card__title">Sterile Laser Suites</h3>
+                    <p class="environment-card__text">
+                        Class 4 medical laser safety rooms with calibrated air filtration, protective eyewear standards, and continuous surface sterilization.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 6 — Our Commitment & Section 7 CTA -->
+<section class="section section--forest-dark text-ivory">
+    <div class="container">
+        <div class="commitment-panel">
+            <span class="editorial-eyebrow text-champagne">Our Promise</span>
+            <h2 class="commitment-panel__title">Our Commitment to You</h2>
+            <p class="commitment-panel__text">
+                We believe you deserve truthful guidance, realistic timelines, and respectful care. 
+                We will never recommend a treatment your skin does not need, nor will we promise overnight miracles. 
+                Your skin journey is a partnership grounded in trust, science, and care.
+            </p>
+            <div class="commitment-panel__actions">
+                <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--champagne-pill">
+                    <span>Book Your Consultation in Lahore</span>
+                    <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+                </a>
+                <a href="{{ url_for('treatments_overview') }}" class="btn btn--glass-pill">
+                    <span>Explore Treatment Protocols</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

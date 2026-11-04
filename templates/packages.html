@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}Curated Clinical Packages &amp; Treatment Journeys | DERMORA Lahore{% endblock %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero section--forest">
+    <div class="page-hero__bg-wrap">
+        <img 
+            src="{{ url_for('static', filename='images/editorial-consult.jpg') }}" 
+            alt="DERMORA Clinical Packages &amp; Consultation" 
+            class="page-hero__bg"
+            loading="eager"
+            width="1440"
+            height="500"
+        >
+        <div class="page-hero__overlay" aria-hidden="true"></div>
+    </div>
+
+    <div class="container page-hero__content">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol class="breadcrumbs__list">
+                <li class="breadcrumbs__item"><a href="{{ url_for('index') }}" class="breadcrumbs__link">Home</a></li>
+                <li class="breadcrumbs__separator" aria-hidden="true">&rsaquo;</li>
+                <li class="breadcrumbs__item"><span class="breadcrumbs__current" aria-current="page">Offers &amp; Packages</span></li>
+            </ol>
+        </nav>
+
+        <span class="editorial-eyebrow text-champagne">Comprehensive Care &bull; Transparent Ethics</span>
+        <h1 class="page-hero__title">
+            Structured treatment journeys for sustained skin health.
+        </h1>
+        <p class="page-hero__subtitle">
+            Curated multi-session pathways designed for optimal biological synergy.
+            We uphold strict medical transparency — no artificial countdowns, exaggerated discounts, or misleading promises.
+        </p>
+
+        <div class="page-hero__actions">
+            <a href="#packages-list" class="btn btn--champagne-pill">
+                <span>Explore Packages</span>
+                <span class="btn__arrow" aria-hidden="true">&darr;</span>
+            </a>
+            <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--glass-pill">
+                <span>Book Consultation</span>
+                <span class="btn__sparkle" aria-hidden="true">&rarr;</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Packages Section -->
+<section class="section section--ivory" id="packages-list">
+    <div class="container">
+        <div class="section-intro text-center">
+            <span class="editorial-eyebrow">Curated Treatment Pathways</span>
+            <h2 class="section-heading">Clinical Care Packages</h2>
+            <p class="section-subtext">
+                Every package begins with a comprehensive skin analysis by our certified practitioners in Lahore. 
+                Package plans are customized to your skin phototype and barrier needs.
+            </p>
+        </div>
+
+        {% if packages and packages|length > 0 %}
+        <div class="packages-editorial-grid">
+            {% for p in packages %}
+            <article class="package-card" id="{{ p.id }}">
+                <div class="package-card__header">
+                    <span class="package-card__badge">{{ p.badge }}</span>
+                    <span class="package-card__category">{{ p.category }}</span>
+                    <h3 class="package-card__title">{{ p.name }}</h3>
+                    <p class="package-card__tagline">{{ p.tagline }}</p>
+                </div>
+
+                <div class="package-card__price-box">
+                    <span class="package-card__price-val">{{ p.indicative_pricing }}</span>
+                    <span class="package-card__price-sub">{{ p.pricing_detail }}</span>
+                </div>
+
+                <div class="package-card__body">
+                    <p class="package-card__desc">{{ p.description }}</p>
+
+                    <h4 class="package-card__list-title">Included in Protocol:</h4>
+                    <ul class="package-card__list">
+                        {% for item in p.included_treatments %}
+                        <li class="package-card__item">
+                            <span class="package-card__check" aria-hidden="true">&#10003;</span>
+                            <span>{{ item }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                    <div class="package-card__meta">
+                        <div class="meta-row">
+                            <span class="meta-row__label">Cadence:</span>
+                            <span class="meta-row__val">{{ p.sessions }}</span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-row__label">Ideal For:</span>
+                            <span class="meta-row__val">{{ p.ideal_for }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="package-card__footer">
+                    <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--champagne btn--full">
+                        <span>Request Assessment for This Package</span>
+                    </a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-offers-box text-center py-12">
+            <p class="text-sage" style="font-size: 1.1rem; padding: 2rem 0;">No current offers available. Please contact us for details.</p>
+        </div>
+        {% endif %}
+
+        <!-- Package Transparency Philosophy Callout -->
+        <div class="pricing-ethics-panel">
+            <div class="pricing-ethics-panel__inner">
+                <div class="pricing-ethics-panel__icon">&#9878;</div>
+                <div class="pricing-ethics-panel__content">
+                    <h3 class="pricing-ethics-panel__title">Our Commitment to Transparent, Ethical Dermatology</h3>
+                    <p class="pricing-ethics-panel__text">
+                        Commercial beauty marketing frequently exploits insecurity with fabricated countdown timers, artificial original prices, 
+                        and '80% off' markdowns. At DERMORA, we believe medical aesthetics requires absolute trust. 
+                        We price our services transparently based on genuine imported pharmaceutical formulations, calibrated energy devices, 
+                        and qualified clinical time.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Package FAQs Section -->
+        <div class="package-faqs-section">
+            <div class="section-intro text-center">
+                <span class="editorial-eyebrow">Clarity &amp; Booking</span>
+                <h2 class="section-heading">Package &amp; Consultation FAQs</h2>
+            </div>
+
+            <div class="faq-accordion-group max-w-3xl mx-auto">
+                {% for faq in package_faqs %}
+                <div class="faq-item js-faq-item">
+                    <button type="button" class="faq-item__trigger js-faq-trigger" aria-expanded="false">
+                        <span class="faq-item__question">{{ faq.q }}</span>
+                        <span class="faq-item__icon" aria-hidden="true">&plus;</span>
+                    </button>
+                    <div class="faq-item__content js-faq-panel" hidden>
+                        <p class="faq-item__answer">{{ faq.a }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block title %}Skin Concerns Guide &amp; Dermatological Insights | DERMORA Lahore{% endblock %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero section--forest">
+    <div class="page-hero__bg-wrap">
+        <img 
+            src="{{ url_for('static', filename='images/editorial-skin-duo.jpg') }}" 
+            alt="DERMORA Skin Concerns &amp; Melanin Biology" 
+            class="page-hero__bg"
+            loading="eager"
+            width="1440"
+            height="500"
+        >
+        <div class="page-hero__overlay" aria-hidden="true"></div>
+    </div>
+
+    <div class="container page-hero__content">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol class="breadcrumbs__list">
+                <li class="breadcrumbs__item"><a href="{{ url_for('index') }}" class="breadcrumbs__link">Home</a></li>
+                <li class="breadcrumbs__separator" aria-hidden="true">&rsaquo;</li>
+                <li class="breadcrumbs__item"><span class="breadcrumbs__current" aria-current="page">Skin Concerns</span></li>
+            </ol>
+        </nav>
+
+        <span class="editorial-eyebrow text-champagne">Diagnostic Guidance &bull; Biology Before Beauty</span>
+        <h1 class="page-hero__title">
+            Every skin concern deserves the right attention.
+        </h1>
+        <p class="page-hero__subtitle">
+            Understand your skin concerns and explore professional guidance for your next step.
+            In South Asian skin, biological hyper-reactivity requires gentle, calibrated approaches rather than aggressive stripping.
+        </p>
+
+        <div class="page-hero__actions">
+            <a href="#concerns-grid" class="btn btn--champagne-pill">
+                <span>Explore Concerns</span>
+                <span class="btn__arrow" aria-hidden="true">&darr;</span>
+            </a>
+            <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--glass-pill">
+                <span>Book Clinical Assessment</span>
+                <span class="btn__sparkle" aria-hidden="true">&rarr;</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Filter Navigation & Concerns Grid -->
+<section class="section section--ivory" id="concerns-grid">
+    <div class="container">
+        <!-- Medical Disclaimer Notice Banner -->
+        <div class="medical-notice-banner">
+            <div class="medical-notice-banner__icon">&excl;</div>
+            <div class="medical-notice-banner__content">
+                <h4 class="medical-notice-banner__title">Dermatological Distinction: Cosmetic vs. Medical Indicators</h4>
+                <p class="medical-notice-banner__text">
+                    A skin concern is not automatically a purely cosmetic condition. Skin darkening, sudden texture alterations, 
+                    or persistent lesions may be cutaneous signs of systemic factors (such as insulin resistance in Acanthosis Nigricans, 
+                    hormonal imbalances, or atopic diathesis). Persistent, irregular, or rapidly changing skin changes require assessment 
+                    by a qualified healthcare professional.
+                </p>
+            </div>
+        </div>
+
+        <!-- Interactive Category Filter -->
+        <div class="filter-bar" role="toolbar" aria-label="Filter skin concerns by category">
+            <button type="button" class="filter-btn is-active js-concern-filter" data-filter="all">
+                All Concerns ({{ concerns|length }})
+            </button>
+            <button type="button" class="filter-btn js-concern-filter" data-filter="face">
+                Facial Concerns
+            </button>
+            <button type="button" class="filter-btn js-concern-filter" data-filter="body">
+                Body Skin Concerns
+            </button>
+            <button type="button" class="filter-btn js-concern-filter" data-filter="pigmentation">
+                Pigmentation &amp; Tone
+            </button>
+            <button type="button" class="filter-btn js-concern-filter" data-filter="texture">
+                Texture &amp; Hydration
+            </button>
+        </div>
+
+        <!-- Concerns Grid -->
+        <div class="concern-catalog-grid js-concern-grid">
+            {% for slug, c in concerns.items() %}
+            <article class="concern-catalog-card js-concern-card" data-category="{{ c.category }}" data-filter-type="{{ c.filter_type }}">
+                <div class="concern-catalog-card__media">
+                    <img 
+                        src="{{ url_for('static', filename='images/' ~ c.image) }}" 
+                        alt="{{ c.name }}" 
+                        class="concern-catalog-card__img"
+                        loading="lazy"
+                        width="500"
+                        height="350"
+                    >
+                    <span class="concern-catalog-card__badge">{{ c.category_label }}</span>
+                </div>
+
+                <div class="concern-catalog-card__body">
+                    <span class="concern-catalog-card__area">{{ c.primary_area }}</span>
+                    <h2 class="concern-catalog-card__title">
+                        <a href="{{ url_for('concern_detail', slug=slug) }}" class="concern-catalog-card__title-link">
+                            {{ c.name }}
+                        </a>
+                    </h2>
+                    <p class="concern-catalog-card__desc">
+                        {{ c.short_desc }}
+                    </p>
+                    <div class="concern-catalog-card__footer">
+                        <a href="{{ url_for('concern_detail', slug=slug) }}" class="concern-catalog-card__link">
+                            <span>Explore Concern Details</span>
+                            <span class="arrow">&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        <!-- Consultation Callout -->
+        <div class="treatment-consult-callout">
+            <div class="treatment-consult-callout__inner">
+                <div class="treatment-consult-callout__content">
+                    <span class="editorial-eyebrow">Clinical Diagnostics</span>
+                    <h3 class="treatment-consult-callout__title">Receive a qualified dermatological diagnosis.</h3>
+                    <p class="treatment-consult-callout__text">
+                        Schedule a private skin assessment at our Gulberg III clinic in Lahore. Unhurried evaluation of melanin depth, barrier function, and appropriate care.
+                    </p>
+                </div>
+                <div class="treatment-consult-callout__action">
+                    <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--champagne">
+                        <span>Book Skin Consultation</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

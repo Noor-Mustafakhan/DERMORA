@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+
+{% block title %}{{ treatment.name }} | Clinical Treatment | DERMORA Lahore{% endblock %}
+
+{% block content %}
+<!-- Section 1 — Treatment Hero -->
+<section class="page-hero section--forest">
+    <div class="page-hero__bg-wrap">
+        <img 
+            src="{{ url_for('static', filename='images/' ~ treatment.banner_image) }}" 
+            alt="{{ treatment.name }}" 
+            class="page-hero__bg"
+            loading="eager"
+            width="1440"
+            height="550"
+        >
+        <div class="page-hero__overlay" aria-hidden="true"></div>
+    </div>
+
+    <div class="container page-hero__content">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol class="breadcrumbs__list">
+                <li class="breadcrumbs__item"><a href="{{ url_for('index') }}" class="breadcrumbs__link">Home</a></li>
+                <li class="breadcrumbs__separator" aria-hidden="true">&rsaquo;</li>
+                <li class="breadcrumbs__item"><a href="{{ url_for('treatments_overview') }}" class="breadcrumbs__link">Treatments</a></li>
+                <li class="breadcrumbs__separator" aria-hidden="true">&rsaquo;</li>
+                <li class="breadcrumbs__item"><span class="breadcrumbs__current" aria-current="page">{{ treatment.name }}</span></li>
+            </ol>
+        </nav>
+
+        <span class="editorial-eyebrow text-champagne">{{ treatment.category_label }} &bull; Calibrated Protocol</span>
+        <h1 class="page-hero__title">
+            {{ treatment.name }}
+        </h1>
+        <p class="page-hero__subtitle">
+            {{ treatment.short_desc }}
+        </p>
+
+        <div class="page-hero__meta-pill-group">
+            <div class="hero-pill">
+                <span class="hero-pill__label">Duration</span>
+                <span class="hero-pill__value">{{ treatment.duration }}</span>
+            </div>
+            <div class="hero-pill">
+                <span class="hero-pill__label">Downtime</span>
+                <span class="hero-pill__value">{{ treatment.downtime }}</span>
+            </div>
+            <div class="hero-pill">
+                <span class="hero-pill__label">Cadence</span>
+                <span class="hero-pill__value">{{ treatment.frequency }}</span>
+            </div>
+        </div>
+
+        <div class="page-hero__actions">
+            <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--champagne-pill">
+                <span>Book Consultation</span>
+                <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+            </a>
+            <a href="#how-it-works" class="btn btn--glass-pill">
+                <span>Explore Protocol Steps</span>
+                <span class="btn__sparkle" aria-hidden="true">&darr;</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Detail Content Container -->
+<div class="detail-page-wrapper section--ivory">
+    <div class="container">
+        <div class="detail-layout">
+            <!-- Main Editorial Column -->
+            <div class="detail-main">
+                <!-- Section 2 — Overview -->
+                <section class="detail-section" id="overview">
+                    <span class="editorial-eyebrow">Dermatological Foundations</span>
+                    <h2 class="detail-section__title">Treatment Overview</h2>
+                    <div class="detail-prose">
+                        <p>{{ treatment.overview }}</p>
+                    </div>
+                </section>
+
+                <!-- Section 3 — Concerns Addressed -->
+                <section class="detail-section" id="concerns-addressed">
+                    <span class="editorial-eyebrow">Target Indications</span>
+                    <h2 class="detail-section__title">Skin Concerns Addressed</h2>
+                    <ul class="detail-checklist">
+                        {% for concern in treatment.concerns_addressed %}
+                        <li class="detail-checklist__item">
+                            <span class="detail-checklist__bullet" aria-hidden="true">&#10003;</span>
+                            <span class="detail-checklist__text">{{ concern }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+                <!-- Section 4 — How It Works -->
+                <section class="detail-section" id="how-it-works">
+                    <span class="editorial-eyebrow">Procedure Architecture</span>
+                    <h2 class="detail-section__title">How It Works: Step by Step</h2>
+                    <div class="detail-steps">
+                        {% for step in treatment.how_it_works %}
+                        <div class="step-card">
+                            <div class="step-card__marker">{{ loop.index }}</div>
+                            <div class="step-card__content">
+                                <h3 class="step-card__title">{{ step.step }}</h3>
+                                <p class="step-card__text">{{ step.detail }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <!-- Section 5 — Potential Benefits -->
+                <section class="detail-section" id="benefits">
+                    <span class="editorial-eyebrow">Realistic Outcomes</span>
+                    <h2 class="detail-section__title">Potential Clinical Benefits</h2>
+                    <p class="detail-section__note">
+                        <em>Note: Individual results vary based on lifestyle, cellular turnover rate, and adherence to sun protection. We do not provide false guarantees.</em>
+                    </p>
+                    <div class="benefits-grid">
+                        {% for benefit in treatment.benefits %}
+                        <div class="benefit-card">
+                            <span class="benefit-card__spark" aria-hidden="true">&bull;</span>
+                            <p class="benefit-card__text">{{ benefit }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <!-- Section 6 — Suitability -->
+                <section class="detail-section" id="suitability">
+                    <span class="editorial-eyebrow">Patient Selection</span>
+                    <h2 class="detail-section__title">Suitability &amp; Assessment</h2>
+                    <div class="detail-prose">
+                        <p>{{ treatment.suitability }}</p>
+                    </div>
+                </section>
+
+                <!-- Section 7 — Precautions and Limitations -->
+                <section class="detail-section detail-section--alert" id="precautions">
+                    <span class="editorial-eyebrow text-champagne-dark">Clinical Safety &bull; Contraindications</span>
+                    <h2 class="detail-section__title">Precautions &amp; Limitations</h2>
+                    <ul class="detail-precaution-list">
+                        {% for item in treatment.precautions %}
+                        <li class="detail-precaution-item">
+                            <span class="detail-precaution-item__icon" aria-hidden="true">&excl;</span>
+                            <span class="detail-precaution-item__text">{{ item }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+                <!-- Section 8 — Aftercare -->
+                <section class="detail-section" id="aftercare">
+                    <span class="editorial-eyebrow">Barrier Recovery</span>
+                    <h2 class="detail-section__title">Recommended Aftercare Protocol</h2>
+                    <ul class="detail-checklist">
+                        {% for item in treatment.aftercare %}
+                        <li class="detail-checklist__item">
+                            <span class="detail-checklist__bullet" aria-hidden="true">&rarr;</span>
+                            <span class="detail-checklist__text">{{ item }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+                <!-- Section 9 — Frequently Asked Questions -->
+                <section class="detail-section" id="faqs">
+                    <span class="editorial-eyebrow">Patient Inquiries</span>
+                    <h2 class="detail-section__title">Frequently Asked Questions</h2>
+                    <div class="faq-accordion-group">
+                        {% for faq in treatment.faqs %}
+                        <div class="faq-item js-faq-item">
+                            <button type="button" class="faq-item__trigger js-faq-trigger" aria-expanded="false">
+                                <span class="faq-item__question">{{ faq.q }}</span>
+                                <span class="faq-item__icon" aria-hidden="true">&plus;</span>
+                            </button>
+                            <div class="faq-item__content js-faq-panel" hidden>
+                                <p class="faq-item__answer">{{ faq.a }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <!-- Related Concerns Section -->
+                {% if related_concerns %}
+                <section class="detail-section" id="related-concerns">
+                    <span class="editorial-eyebrow">Connected Understanding</span>
+                    <h2 class="detail-section__title">Related Skin Concerns</h2>
+                    <div class="related-cards-grid">
+                        {% for c in related_concerns %}
+                        <a href="{{ url_for('concern_detail', slug=c.slug) }}" class="related-card">
+                            <span class="related-card__category">{{ c.category_label }}</span>
+                            <h3 class="related-card__title">{{ c.name }}</h3>
+                            <p class="related-card__text">{{ c.short_desc[:110] }}...</p>
+                            <span class="related-card__link">Read Concern Guide &rarr;</span>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endif %}
+            </div>
+
+            <!-- Sticky Sidebar Information Panel -->
+            <aside class="detail-sidebar">
+                <div class="sticky-card">
+                    <div class="sticky-card__header">
+                        <span class="sticky-card__badge">Clinical Protocol</span>
+                        <h3 class="sticky-card__title">{{ treatment.name }}</h3>
+                        <p class="sticky-card__price-note">{{ treatment.pricing_note }}</p>
+                    </div>
+
+                    <div class="sticky-card__divider"></div>
+
+                    <ul class="sticky-card__specs">
+                        <li class="spec-row">
+                            <span class="spec-row__label">Session Duration:</span>
+                            <span class="spec-row__val">{{ treatment.duration }}</span>
+                        </li>
+                        <li class="spec-row">
+                            <span class="spec-row__label">Recovery Downtime:</span>
+                            <span class="spec-row__val">{{ treatment.downtime }}</span>
+                        </li>
+                        <li class="spec-row">
+                            <span class="spec-row__label">Recommended Frequency:</span>
+                            <span class="spec-row__val">{{ treatment.frequency }}</span>
+                        </li>
+                        <li class="spec-row">
+                            <span class="spec-row__label">Location:</span>
+                            <span class="spec-row__val">Gulberg III, Lahore</span>
+                        </li>
+                    </ul>
+
+                    <div class="sticky-card__cta">
+                        <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--champagne btn--full">
+                            <span>Request Consultation</span>
+                        </a>
+                        <a href="tel:{{ contact_phone }}" class="btn btn--outline-dark btn--full btn--sm mt-3">
+                            <span>Call Clinic: {{ contact_phone }}</span>
+                        </a>
+                    </div>
+
+                    <div class="sticky-card__footer">
+                        <p class="sticky-card__safety-notice">
+                            All treatments require an in-person clinical assessment by our certified practitioners in Lahore.
+                        </p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Section 10 — Final Consultation CTA -->
+        <div class="detail-closing-cta">
+            <div class="detail-closing-cta__inner">
+                <span class="editorial-eyebrow">Personalized Skin Journey</span>
+                <h2 class="detail-closing-cta__title">
+                    Begin with an unhurried, personalized assessment.
+                </h2>
+                <p class="detail-closing-cta__text">
+                    Discuss your expectations, evaluate your skin phototype, and review appropriate clinical parameters with our team in Gulberg III, Lahore.
+                </p>
+                <div class="detail-closing-cta__actions">
+                    <a href="{{ url_for('contact_page') }}#consultation" class="btn btn--champagne-pill">
+                        <span>Book Your Consultation</span>
+                        <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+                    </a>
+                    <a href="{{ url_for('treatments_overview') }}" class="btn btn--glass-pill">
+                        <span>Back to All Treatments</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
